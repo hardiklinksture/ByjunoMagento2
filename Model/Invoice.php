@@ -214,6 +214,9 @@ class Invoice extends \Byjuno\ByjunoCore\Model\Byjunopayment
             $this->_executed  = true;
             /* @var $payment \Magento\Quote\Model\Quote\Payment */
             $quote = $this->_checkoutSession->getQuote();
+	    if (!$quote->getId()) {
+                $quote = $payment->getQuote();
+            }
             $prefix = "";
             if ($this->_state->getAreaCode() == "adminhtml") {
                 $prefix = " (Backend)";
